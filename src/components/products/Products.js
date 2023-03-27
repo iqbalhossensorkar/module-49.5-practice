@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { getTotal } from '../../utilities/calculate';
 import Product from '../product/Product';
 import "./Products.css"
 
@@ -9,12 +10,13 @@ const Products = () => {
         .then(res => res.json())
         .then(data => setProducts(data))
     }, [])
+
+    const add = getTotal(products)
     
     return (
-        <div className='products-container'>
-            {/* {
-                products.map(product => console.log(product))
-            } */}
+        <div>
+            <p style={{textAlign: 'center'}}>Total: {add}</p>
+            <div className='products-container'>
             {
                 products.map(product => 
                 <Product
@@ -22,6 +24,7 @@ const Products = () => {
                     key={product.id}
                 ></Product>)
             }
+        </div>
         </div>
     );
 };
